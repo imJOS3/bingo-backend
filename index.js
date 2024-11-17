@@ -1,11 +1,11 @@
 import express from 'express';
-import http from 'http'; // Importa http para usarlo con Socket.IO
-import { Server as SocketIOServer } from 'socket.io'; // Importa la clase Server de Socket.IO
+import http from 'http'; 
+import { Server as SocketIOServer } from 'socket.io'; 
 import db from './database/db.js';
 import bingoRoutes from './routes/bingoRoutes.js';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import os from 'os'; // Módulo para obtener la dirección IP local
+import os from 'os'; 
 
 dotenv.config();
 
