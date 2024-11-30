@@ -1,8 +1,7 @@
 import games from "../model/games.js";
 
-// Función para crear un nuevo juego
 export const createGame = async (req, res) => {
-    const { game_name, game_time, game_status, game_mode_id } = req.body;
+    const { game_name, game_time, game_status, game_mode_id, creator_id } = req.body;
 
     try {
         // Validar que el nombre del juego esté presente
@@ -10,13 +9,21 @@ export const createGame = async (req, res) => {
             return res.status(400).json({ message: "Game name is required" });
         }
 
+        // Validar que el creator_id esté presente
+        if (!creator_id) {
+            return res.status(400).json({ message: "Creator ID is required" });
+        }
+
+        // Crear un nuevo juego
         const newGame = await games.create({
             game_name,
             game_time: game_time || 3,  // Tiempo de juego, con valor predeterminado de 3
             game_status: game_status || "active",  // Estado del juego, por defecto "active"
             game_mode_id,  // El modo de juego, si está presente
-            user_count: 0 // Establece el user_count en 0 por defecto
+            creator_id,    // El ID del creador del juego
+            user_count: 0  // Establece el user_count en 0 por defecto
         });
+
         res.status(201).json(newGame);
     } catch (error) {
         res.status(500).json({ message: error.message });
