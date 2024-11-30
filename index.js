@@ -7,14 +7,15 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import os from 'os'; 
 
-dotenv.config();
+
 
 const app = express();
 // Crear un servidor HTTP para usar con Socket.IO
+dotenv.config();
 const server = http.createServer(app);
 const io = new SocketIOServer(server, {
   cors: {
-    origin: '*', // Permitir todas las solicitudes desde cualquier origen
+    origin: ['*', 'http://localhost:5173'], // Permitir todas las solicitudes desde cualquier origen
   },
 });
 
